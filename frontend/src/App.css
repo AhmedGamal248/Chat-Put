@@ -62,6 +62,10 @@
   font-family: inherit;
 }
 
+.quick-action{
+  margin-bottom: 15px;
+}
+
 .ghost-button {
   padding: 12px 16px;
   background: rgba(148, 163, 196, 0.08);
@@ -78,8 +82,9 @@
 .quick-actions {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 20px;
   padding: 14px 18px 0;
+  border-bottom: 1px solid #d6e8ff18;
 }
 
 .quick-action {

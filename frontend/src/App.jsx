@@ -125,7 +125,11 @@ const QUICK_ACTIONS = {
   ],
 
   default: [
+    
     'ايه المستندات المطلوبة؟',
+    'عايز اراجع الموقف القانوني للوحدة',
+    'بدور على شقة بالتقسيط',
+
   ]
 }
 
@@ -137,9 +141,8 @@ const PLACEHOLDERS = {
   collect_down_payment: 'مثال: المقدم 500 الف',
   // collect_down_payment: "",
   // collect_property_status: "",
-  collect_property_status: 'مثال: الشقة مسجلة شهر عقاري',
-  // collect_phone: 'مثال: رقمي 01012345678',
-  collect_phone: "",
+  collect_phone: 'مثال: رقمي 01XXXXXXXXX',
+  // collect_phone: "",
   default: 'اكتب سؤالك او بياناتك هنا'
 }
 
