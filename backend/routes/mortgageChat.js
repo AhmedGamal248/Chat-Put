@@ -8,6 +8,61 @@ const router = express.Router();
 const RESPONSE_BUDGET_MS = 4500;
 
 const EMPTY_SESSION_DATA = { phone: null, income: null, propertyValue: null, downPayment: null, propertyLegalStatus: null };
+const PROPERTY_CARD_TEMPLATES = [
+  {
+    id: 'new-cairo-apartment',
+    title: 'شقة في القاهرة الجديدة',
+    image: 'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=900&q=80'
+  },
+  {
+    id: 'october-apartment',
+    title: 'شقة في 6 أكتوبر',
+    image: 'https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=900&q=80'
+  }
+];
+
+function formatMoney(value) {
+  if (!Number.isFinite(value)) return null;
+  return new Intl.NumberFormat('ar-EG').format(Math.round(value));
+}
+
+function roundToNearest(value, step = 50_000) {
+  if (!Number.isFinite(value) || value <= 0) {
+    return step;
+  }
+
+  return Math.max(step, Math.round(value / step) * step);
+}
+
+function buildSuggestedCards(data = {}) {
+  let basePrice = Number.isFinite(data.propertyValue) ? data.propertyValue : null;
+
+  if (!Number.isFinite(basePrice) && Number.isFinite(data.income)) {
+    basePrice = data.income * 35;
+  }
+
+  if (!Number.isFinite(basePrice) && Number.isFinite(data.downPayment)) {
+    basePrice = data.downPayment * 4;
+  }
+
+  if (!Number.isFinite(basePrice)) {
+    basePrice = 1_800_000;
+  }
+
+  const priceVariants = [0.96, 1.08];
+
+  return PROPERTY_CARD_TEMPLATES.map((card, index) => {
+    const price = roundToNearest(basePrice * priceVariants[index]);
+
+    return {
+      id: card.id,
+      title: card.title,
+      image: card.image,
+      price,
+      priceLabel: `${formatMoney(price)} جنيه`
+    };
+  });
+}
 
 
 async function saveLeadRecord(data, sessionId, intent) {
@@ -93,6 +148,7 @@ router.post('/chat', async (req, res) => {
 
     // ── دمج البيانات ──────────────────────────────────────────────
     const captured = aiResponse.dataCaptured || {};
+    const hadPhoneBefore = Boolean(session.data?.phone);
     const updatedData = {
       phone              : captured.phone               ?? session.data.phone               ?? null,
       income             : captured.income              ?? session.data.income              ?? null,
@@ -100,12 +156,14 @@ router.post('/chat', async (req, res) => {
       downPayment        : captured.downPayment         ?? session.data.downPayment         ?? null,
       propertyLegalStatus: captured.propertyLegalStatus ?? session.data.propertyLegalStatus ?? null,
     };
+    const shouldShowPropertyCards = !hadPhoneBefore && Boolean(updatedData.phone);
 
     const finalResponse = {
       reply    : String(aiResponse.reply || '').trim(),
       intent   : aiResponse.intent,
       next_step: aiResponse.next_step || session.stage,
       cta      : String(aiResponse.cta || '').trim(),
+      images   : shouldShowPropertyCards ? buildSuggestedCards(updatedData) : []
     };
 
     // ── حفظ غير متزامن ───────────────────────────────────────────

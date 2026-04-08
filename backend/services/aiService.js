@@ -261,7 +261,11 @@ function buildFallbackResponse({ mergedData, intent }) {
           'كشف حساب بنكي عن آخر 6 أشهر أو إقرارات ضريبية عن آخر 3 سنوات أو قوائم مالية عن آخر 3 سنوات معتمدة من قبل مراجع خارجي مسجل لدى البنك المركزي المصري',
             'لو تحب تشوف الشروط كاملة "هنا هنحط لينك لشروط البنك" ',
             
-        ], { intent, nextStep, cta: 'ابعت صافي دخلك الشهري ونبدأ التأهيل المبدئي 👇' });
+        ], { intent, nextStep, cta: 'ابعت صافي دخلك الشهري ونبدأ التأهيل المبدئي 👇' ,
+           images : [
+    "https://example.com/img1.jpg",
+    "https://example.com/img2.jpg"
+  ],});
   }
 
   // ── لم يُذكر سعر الوحدة بعد ─────────────────────────────────
@@ -273,7 +277,12 @@ function buildFallbackResponse({ mergedData, intent }) {
       affordability
         ? `- على دخل ${formatMoney(mergedData.income)} جنيه، القسط الآمن غالباً في حدود ${formatMoney(affordability.maxInstallment)} جنيه شهرياً، وده قد يناسب وحدة قرب ${formatMoney(affordability.estimatedPropertyValue)} جنيه بمقدم افتراضي 20%.`
         : null,
-    ], { intent, nextStep, cta: 'ابعت سعر الوحدة أو ميزانيتك التقريبية ونكمل الحسابات معاك 👇' });
+    ], { intent, nextStep, cta: 'ابعت سعر الوحدة أو ميزانيتك التقريبية ونكمل الحسابات معاك 👇',
+           images : [
+    "https://example.com/img1.jpg",
+    "https://example.com/img2.jpg"
+  ],
+     });
   }
 
   // ── لم يُذكر المقدم بعد ──────────────────────────────────────

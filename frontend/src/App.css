@@ -123,6 +123,10 @@
   align-self: flex-end;
 }
 
+.message-card.has-cards {
+  max-width: min(92%, 860px);
+}
+
 .message-card.loading {
   width: 132px;
 }
@@ -166,6 +170,50 @@
 
 .message-body p + p {
   margin-top: 8px;
+}
+
+.property-cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.property-card {
+  overflow: hidden;
+  border-radius: 20px;
+  background: rgba(9, 15, 29, 0.72);
+  border: 1px solid rgba(138, 163, 208, 0.14);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+}
+
+.property-card-image {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  display: block;
+  object-fit: cover;
+  background: rgba(13, 20, 39, 0.96);
+}
+
+.property-card-content {
+  padding: 12px 14px 14px;
+}
+
+.property-card-title,
+.property-card-price {
+  margin: 0;
+}
+
+.property-card-title {
+  font-size: 0.96rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.property-card-price {
+  margin-top: 6px;
+  color: var(--brand-dark);
+  font-weight: 700;
 }
 
 .typing-indicator {
@@ -296,5 +344,9 @@
 
   .composer button {
     min-height: 50px;
+  }
+
+  .property-cards {
+    grid-template-columns: 1fr;
   }
 }
