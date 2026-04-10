@@ -2,13 +2,15 @@ import mongoose from 'mongoose';
 
 const sessionSchema = new mongoose.Schema({
   sessionId: { type: String, required: true, unique: true },
-  stage: { type: String, default: 'welcome' },
+  stage: { type: String, default: 'collect_name' },
   data: {
+    name: { type: String, default: null },
+    maritalStatus: { type: String, default: null },
     phone: { type: String, default: null },
     income: { type: Number, default: null },
+    obligations: { type: Number, default: null },
     propertyValue: { type: Number, default: null },
-    downPayment: { type: Number, default: null },
-    propertyLegalStatus: { type: String, default: null }
+    downPayment: { type: Number, default: null }
   },
   messages: [{
     sender: { type: String, enum: ['user', 'bot'], required: true },

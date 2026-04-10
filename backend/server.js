@@ -3,7 +3,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import connectDB from './config/database.js';
 import leadRoutes from './routes/lead.js';
-import chatRoutes from './routes/mortgageChat.js';
+import chatRoutes from './routes/mortgageAdvisorChat.js';
 
 dotenv.config();
 

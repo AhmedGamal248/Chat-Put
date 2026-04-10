@@ -1,12 +1,22 @@
 ﻿import express from 'express';
 import Lead from '../models/Lead.js';
-import { extractPhone } from '../services/aiService.js';
+import { extractPhone } from '../services/mortgageFlowService.js';
 
 const router = express.Router();
 
 router.post('/lead', async (req, res) => {
   try {
-    const { name, phone, income, propertyValue, downPayment, propertyLegalStatus, intent, sessionId } = req.body;
+    const {
+      name,
+      phone,
+      maritalStatus,
+      income,
+      obligations,
+      propertyValue,
+      downPayment,
+      intent,
+      sessionId
+    } = req.body;
 
     const normalizedPhone = extractPhone(phone || '');
     if (!normalizedPhone) {
@@ -19,13 +29,15 @@ router.post('/lead', async (req, res) => {
     if (name) lead.name = name;
     if (sessionId) lead.sessionId = sessionId;
     if (intent) lead.intent = intent;
-    if (propertyLegalStatus) lead.propertyLegalStatus = propertyLegalStatus;
+    if (maritalStatus) lead.maritalStatus = maritalStatus;
 
     const parsedIncome = Number(income);
+    const parsedObligations = Number(obligations);
     const parsedPropertyValue = Number(propertyValue);
     const parsedDownPayment = Number(downPayment);
 
     if (Number.isFinite(parsedIncome)) lead.income = parsedIncome;
+    if (Number.isFinite(parsedObligations)) lead.obligations = parsedObligations;
     if (Number.isFinite(parsedPropertyValue)) lead.propertyValue = parsedPropertyValue;
     if (Number.isFinite(parsedDownPayment)) lead.downPayment = parsedDownPayment;
 
