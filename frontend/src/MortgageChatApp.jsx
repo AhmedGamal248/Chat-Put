@@ -82,24 +82,24 @@ const NUMERIC_STEPS = new Set([
 // ─── شروط الوحدة السكنية ─────────────────────────────────────────────────────
 const UNIT_CONDITIONS_TEXT = `شروط الوحدة السكنية للحصول على تمويل عقاري:
 
-1️⃣ الوحدة مسجلة رسمياً أو قابلة للتسجيل في الشهر العقاري.
-2️⃣ الوحدة مكتملة البناء أو في مرحلة متقدمة من التشطيب.
-3️⃣ سعر الوحدة يتراوح بين 200,000 و2,000,000 جنيه (حسب المبادرة).
-4️⃣ الوحدة خالية من أي نزاعات أو رهون قائمة.
-5️⃣ الوحدة للسكن الأول فقط (لا تُقبل وحدات الاستثمار أو الإيجار).
-6️⃣ مساحة الوحدة لا تقل عن 40 م² ولا تزيد عن 200 م².`;
+1- الوحدة مسجلة رسمياً أو قابلة للتسجيل في الشهر العقاري.
+2- الوحدة مكتملة البناء أو في مرحلة متقدمة من التشطيب.
+3- سعر الوحدة يتراوح بين 200,000 و2,000,000 جنيه (حسب المبادرة).
+4- الوحدة خالية من أي نزاعات أو رهون قائمة.
+5- الوحدة للسكن الأول فقط (لا تُقبل وحدات الاستثمار أو الإيجار).
+6- مساحة الوحدة لا تقل عن 40 م² ولا تزيد عن 200 م².`;
 
 // ─── شروط الشخص ──────────────────────────────────────────────────────────────
 const PERSON_CONDITIONS_TEXT = `شروط الشخص للحصول على تمويل عقاري:
 
-1️⃣ السن من 21 إلى 60 سنة (للموظفين) أو حتى 65 (لأصحاب الأعمال).
-2️⃣ الجنسية مصرية أو إقامة سارية للأجانب.
-3️⃣ صافي الدخل الشهري:
+1- السن من 21 إلى 60 سنة (للموظفين) أو حتى 65 (لأصحاب الأعمال).
+2- الجنسية مصرية أو إقامة سارية للأجانب.
+3- صافي الدخل الشهري:
    • أعزب: لا يتجاوز 13,000 جنيه (مبادرة 8%) أو 40,000 (مبادرة 12%)
    • متزوج: لا يتجاوز 18,000 جنيه (مبادرة 8%) أو 50,000 (مبادرة 12%)
-4️⃣ لا يمتلك الشخص وحدة سكنية مُمَوَّلة من قبل.
-5️⃣ سجل ائتماني نظيف بدون توقفات أو متأخرات.
-6️⃣ خدمة في العمل لا تقل عن 6 أشهر (للموظفين).`;
+4- لا يمتلك الشخص وحدة سكنية مُمَوَّلة من قبل.
+5- سجل ائتماني نظيف بدون توقفات أو متأخرات.
+6- خدمة في العمل لا تقل عن 6 أشهر (للموظفين).`;
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 function createMessage({ sender, text, cta = '', intent = 'mortgage_info', nextStep = 'collect_name', images = [], quickReplies = [] }) {
@@ -213,11 +213,9 @@ function MortgageChatApp() {
           nextStep: 'violations_redirect',
           intent: 'violations'
         });
-        if (typeof window !== 'undefined') {
-          setTimeout(() => {
-            window.location.href = homePageUrl;
-          }, 1200);
-        }
+        setTimeout(() => {
+          window.location.href = homePageUrl;
+        }, 5000);
         return true;
       }
     }
@@ -370,15 +368,7 @@ function MortgageChatApp() {
     <div className="mortgage-app" dir="rtl">
       <section className="chat-panel">
 
-        {/* شريط الأدوات */}
-        <div className="chat-toolbar">
-          <button type="button" className="ghost-button" onClick={() => sendMessage('back')} disabled={loading}>
-            رجوع
-          </button>
-          <button type="button" className="ghost-button" onClick={() => sendMessage('restart')} disabled={loading}>
-            إعادة البدء
-          </button>
-        </div>
+        
 
         {/* أزرار سريعة */}
         
@@ -451,7 +441,7 @@ function MortgageChatApp() {
         <form className="composer" onSubmit={handleSubmit}>
          
 
-          <div className="composer-row">
+          <div className="composer-row ">
             <input
               inputMode={inputMode}
               enterKeyHint="send"
@@ -467,6 +457,16 @@ function MortgageChatApp() {
             </button>
           </div>
         </form>
+
+        {/* شريط الأدوات */}
+        <div className="chat-toolbar">
+          <button type="button" className="ghost-button" onClick={() => sendMessage('back')} disabled={loading}>
+            رجوع
+          </button>
+          <button type="button" className="ghost-button" onClick={() => sendMessage('restart')} disabled={loading}>
+            إعادة البدء
+          </button>
+        </div>
 
       </section>
     </div>

@@ -37,10 +37,10 @@
 
 .chat-toolbar {
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   gap: 10px;
   padding: 16px 18px 10px;
-  border-bottom: 1px solid var(--line);
+  border-top: 1px solid var(--line);
 }
 
 .ghost-button,
@@ -242,6 +242,7 @@
 
 .composer {
   display: flex;
+  flex-wrap: nowrap;
   flex-direction: column;
   gap: 12px;
   padding: 16px 18px 18px;
@@ -276,10 +277,11 @@
 }
 
 .composer-row {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 12px;
-  align-items: center;
+    display: flex;
+    grid-template-columns: 1fr auto;
+    gap: 12px;
+    align-items: center;
+    flex-direction: row;
 }
 
 .composer input {
@@ -300,8 +302,9 @@
 }
 
 .composer button {
-  min-width: 128px;
+  /* min-width: 128px;*/
   min-height: 56px;
+  width: 25% !important;
   padding: 0 22px;
   background: linear-gradient(135deg, #074f74, var(--sky));
   color: white;
