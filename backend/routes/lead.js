@@ -6,17 +6,7 @@ const router = express.Router();
 
 router.post('/lead', async (req, res) => {
   try {
-    const {
-      name,
-      phone,
-      maritalStatus,
-      income,
-      obligations,
-      propertyValue,
-      downPayment,
-      intent,
-      sessionId
-    } = req.body;
+    const {name, phone, maritalStatus, income, obligations, propertyValue, downPayment, intent, sessionId } = req.body;
 
     const normalizedPhone = extractPhone(phone || '');
     if (!normalizedPhone) {

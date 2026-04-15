@@ -6,6 +6,16 @@ import { getChatResponse, extractPhone } from '../services/mortgageFlowService.j
 const router = express.Router();
 
 const RESPONSE_BUDGET_MS = 4500;
+const ALLOWED_STAGES = new Set([
+  'collect_name',
+  'collect_marital_status',
+  'collect_income',
+  'collect_obligations',
+  'collect_property_price',
+  'collect_down_payment',
+  'collect_phone',
+  'lead_saved'
+]);
 
 const EMPTY_SESSION_DATA = {
   name: null,
@@ -95,8 +105,8 @@ function resolveFallbackStep(data = {}) {
   if (!data.maritalStatus) return 'collect_marital_status';
   if (!Number.isFinite(data.income)) return 'collect_income';
   if (!Number.isFinite(data.obligations)) return 'collect_obligations';
-  if (!Number.isFinite(data.downPayment)) return 'collect_down_payment';
   if (!Number.isFinite(data.propertyValue)) return 'collect_property_price';
+  if (!Number.isFinite(data.downPayment)) return 'collect_down_payment';
   if (!data.phone) return 'collect_phone';
   return 'lead_saved';
 }
@@ -140,21 +150,23 @@ function buildTimeoutFallback(data = {}) {
     });
   }
 
-  if (step === 'collect_down_payment') {
-    return buildJsonResponse({
-      reply: 'تمام.\nهل لديك مقدم؟ وإذا نعم، كم قيمته؟',
-      intent: 'mortgage_info',
-      next_step: 'collect_down_payment',
-      cta: 'اكتب قيمة المقدم أو 0 لو مفيش 👇'
-    });
-  }
-
   if (step === 'collect_property_price') {
     return buildJsonResponse({
-      reply: `المقدم المسجل ${formatMoney(data.downPayment)} جنيه.\nما سعر الوحدة السكنية المتوقع؟`,
+      reply: 'تمام.\nما سعر الوحدة السكنية المتوقع؟',
       intent: 'mortgage_info',
       next_step: 'collect_property_price',
       cta: 'اكتب سعر الوحدة المتوقع 👇'
+    });
+  }
+
+  if (step === 'collect_down_payment') {
+    const minDownPayment = Math.round((data.propertyValue || 0) * 0.05);
+    const maxDownPayment = Math.round((data.propertyValue || 0) * 0.2);
+    return buildJsonResponse({
+      reply: `سعر الوحدة المسجل ${formatMoney(data.propertyValue)} جنيه.\nما قيمة المقدم؟ (بين 5% و20% من سعر الوحدة)`,
+      intent: 'mortgage_info',
+      next_step: 'collect_down_payment',
+      cta: `اكتب المقدم بين ${formatMoney(minDownPayment)} و${formatMoney(maxDownPayment)} جنيه 👇`
     });
   }
 
@@ -197,7 +209,12 @@ async function saveLeadRecord(data, sessionId, intent) {
 
 router.post('/chat', async (req, res) => {
   try {
-    const { text = '', sessionId = 'default' } = req.body;
+    const {
+      text = '',
+      sessionId = 'default',
+      stageHint = '',
+      clientData = {}
+    } = req.body;
     const textValue = String(text || '').trim();
     const lower = textValue.toLowerCase();
 
@@ -216,6 +233,17 @@ router.post('/chat', async (req, res) => {
 
     session.messages = Array.isArray(session.messages) ? session.messages : [];
     session.data = session.data || { ...EMPTY_SESSION_DATA };
+
+    const normalizedStageHint = ALLOWED_STAGES.has(stageHint) ? stageHint : null;
+    if (clientData && typeof clientData === 'object') {
+      const safeName = typeof clientData.name === 'string' ? clientData.name.trim() : '';
+      if (safeName && !session.data.name) {
+        session.data.name = safeName;
+      }
+    }
+    if (normalizedStageHint && session.stage === 'collect_name' && session.data?.name) {
+      session.stage = normalizedStageHint;
+    }
 
     if (lower === 'back') {
       session.messages = session.messages.slice(0, -2);
@@ -257,7 +285,7 @@ router.post('/chat', async (req, res) => {
           userMessage: textValue,
           conversationHistory: session.messages,
           sessionData: session.data,
-          stage: session.stage || 'collect_name'
+          stage: normalizedStageHint || session.stage || 'collect_name'
         }),
         new Promise((_, reject) =>
           setTimeout(() => reject(new Error('timeout')), RESPONSE_BUDGET_MS)
@@ -283,11 +311,13 @@ router.post('/chat', async (req, res) => {
       phone: captured.phone ?? session.data.phone ?? null
     };
 
-    const shouldShowPropertyCards = !hadPhoneBefore && Boolean(updatedData.phone);
+    const nextStep = aiResponse.next_step || session.stage || 'collect_name';
+    const shouldShowPropertyCards =
+      nextStep === 'collect_phone' || (!hadPhoneBefore && Boolean(updatedData.phone));
     const finalResponse = buildJsonResponse({
       reply: aiResponse.reply,
       intent: aiResponse.intent,
-      next_step: aiResponse.next_step || session.stage || 'collect_name',
+      next_step: nextStep,
       cta: aiResponse.cta,
       images: shouldShowPropertyCards ? buildSuggestedCards(updatedData) : []
     });
