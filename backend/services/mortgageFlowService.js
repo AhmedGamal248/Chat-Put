@@ -1,5 +1,5 @@
 const MAX_INSTALLMENT_RATIO = 0.4;
-const MIN_DOWN_PAYMENT_RATIO = 0.05;   // 5% من سعر الوحدة
+const MIN_DOWN_PAYMENT_RATIO = 0.15;   // 5% من سعر الوحدة
 const MAX_DOWN_PAYMENT_RATIO = 0.20;   // 20% من سعر الوحدة
 
 const PROGRAMS = [
@@ -411,7 +411,7 @@ function buildQuestionResponse(data = {}, capturedData = {}, stage = '') {
     const minDP = Math.round((data.propertyValue || 0) * MIN_DOWN_PAYMENT_RATIO);
     const maxDP = Math.round((data.propertyValue || 0) * MAX_DOWN_PAYMENT_RATIO);
     return buildResponse(
-      `سعر الوحدة المسجل ${formatMoney(data.propertyValue)} جنيه.\nهل لديك مقدم؟ المقدم المطلوب يكون بين ${formatMoney(minDP)} و${formatMoney(maxDP)} جنيه (5% إلى 20% من سعر الوحدة).`,
+      `سعر الوحدة المسجل ${formatMoney(data.propertyValue)} جنيه.\nهل لديك مقدم؟ المقدم المطلوب يكون بين ${formatMoney(minDP)} و${formatMoney(maxDP)} جنيه (15% إلى 20% من سعر الوحدة).`,
       'collect_down_payment',
       `اكتب قيمة المقدم بين ${formatMoney(minDP)} و${formatMoney(maxDP)} جنيه 👇`
     );
@@ -539,7 +539,7 @@ function buildPhoneCapturedResponse(data = {}) {
   const evaluation = pickBestEvaluation(data);
   return buildResponse(
     [
-      `تمام يا ${getFirstName(data.name)}، سجلنا رقمك ✅`,
+      `تمام يا ${getFirstName(data.name)}، ✅`,
       `- المبادرة الأنسب ليك حاليًا: ${evaluation.program.label}.`,
       `- التمويل المتاح تقريبياً: ${formatMoney(evaluation.availableFinance)} جنيه.`,
       `- القسط المتوقع على السيناريو الحالي: ${formatMoney(evaluation.expectedInstallment)} جنيه شهرياً.`,
