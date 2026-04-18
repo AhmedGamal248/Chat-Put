@@ -110,12 +110,15 @@
 
 .message-card.user {
   align-self: flex-start;
-  background: linear-gradient(135deg, rgba(36, 74, 128, 0.96), rgba(28, 53, 93, 0.96));
-  color: #f4f8ff;
+  background: rgba(42, 91, 161, 0.96);
+  color: #fff;
 }
 
 .message-card.bot {
   align-self: flex-end;
+  background: rgb(212 215 224 / 94%);
+  color: black;
+  font-weight: 700;
 }
 
 .message-card.has-cards {
@@ -304,7 +307,7 @@
 .composer button {
   /* min-width: 128px;*/
   min-height: 56px;
-  width: 25% !important;
+  width: 22% !important;
   padding: 0 22px;
   background: linear-gradient(135deg, #074f74, var(--sky));
   color: white;
@@ -402,4 +405,11 @@
   .property-cards {
     grid-template-columns: 1fr;
   }
+}
+
+.chat-header {
+    text-align: center;
+    border: 1px solid #ffffff30;
+    border-radius: 15px;
+    background: #00003494;
 }

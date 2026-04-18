@@ -312,8 +312,7 @@ router.post('/chat', async (req, res) => {
     };
 
     const nextStep = aiResponse.next_step || session.stage || 'collect_name';
-    const shouldShowPropertyCards =
-      nextStep === 'collect_phone' || (!hadPhoneBefore && Boolean(updatedData.phone));
+    const shouldShowPropertyCards = !hadPhoneBefore && Boolean(updatedData.phone);
     const finalResponse = buildJsonResponse({
       reply: aiResponse.reply,
       intent: aiResponse.intent,

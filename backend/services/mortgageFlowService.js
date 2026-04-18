@@ -1,6 +1,8 @@
 const MAX_INSTALLMENT_RATIO = 0.4;
-const MIN_DOWN_PAYMENT_RATIO = 0.15;   // 5% من سعر الوحدة
+const MIN_DOWN_PAYMENT_RATIO = 0.15;   // 15% من سعر الوحدة
 const MAX_DOWN_PAYMENT_RATIO = 0.20;   // 20% من سعر الوحدة
+const MAX_INCOME_SINGLE = 40_000;      // حد أقصى للدخل للأعزب
+const MAX_INCOME_MARRIED = 50_000;     // حد أقصى للدخل للمتزوج
 
 const PROGRAMS = [
   {
@@ -8,14 +10,14 @@ const PROGRAMS = [
     label: 'مبادرة 8% لمتوسطي الدخل',
     annualRate: 0.08,
     minPropertyValue: 0,
-    maxPropertyValue: 900_000,
+    maxPropertyValue: 1_400_000,
     maxYears: 30,
     adminFeeRate: 0.01,
     financeBands: [
       {
         minPropertyValue: 0,
-        maxPropertyValue: 900_000,
-        financeRatio: 0.85
+        maxPropertyValue: 1_400_000,
+        financeRatio: 0.80
       }
     ],
     incomeCaps: {
@@ -31,13 +33,13 @@ const PROGRAMS = [
     label: 'مبادرة 12% لمتوسطي الدخل',
     annualRate: 0.12,
     minPropertyValue: 200_000,
-    maxPropertyValue: 2_000_000,
+    maxPropertyValue: 2_500_000,
     maxYears: 25,
     adminFeeRate: 0.01,
     financeBands: [
       {
         minPropertyValue: 200_000,
-        maxPropertyValue: 2_000_000,
+        maxPropertyValue: 2_500_000,
         financeRatio: 0.8
       }
     ],
@@ -143,7 +145,8 @@ function extractMaritalStatus(userMessage = '') {
 function extractObligations(userMessage = '', stage = '') {
   const message = normalizeText(userMessage).toLowerCase();
   const compactValue = message.replace(/\s+/g, ' ').trim();
-  if (stage === 'collect_obligations' && /^(?:مفيش|مافيش|لا يوجد|بدون|ولا حاجة|صفر|none|no|0+)$/.test(compactValue)) return 0;
+  if (stage === 'collect_obligations' && /^(?:لا)$/.test(compactValue)) return 0;
+  if (stage === 'collect_obligations' && /^(?:نعم)$/.test(compactValue)) return 1;
   const amount = extractAmountNearKeywords(message, ['التزامات', 'التزام', 'قسط', 'اقساط', 'أقساط', 'قرض', 'ديون', 'مديونية', 'credit', 'loan']);
   if (Number.isFinite(amount)) return amount;
   const amounts = extractAllAmounts(message);
@@ -304,6 +307,15 @@ function pickBestEvaluation(data) {
   })[0];
 }
 
+// تحديد المبادرة الأنسب بناءً على الدخل والحالة الاجتماعية فقط (بدون سعر الوحدة)
+function pickProgramByIncome(income, maritalStatus) {
+  for (const p of PROGRAMS) {
+    const cap = maritalStatus === 'married' ? p.incomeCaps.married : p.incomeCaps.single;
+    if (Number.isFinite(income) && income <= cap) return p;
+  }
+  return PROGRAMS[PROGRAMS.length - 1];
+}
+
 function getFirstName(name = '') {
   return normalizeText(name).split(' ')[0] || 'حضرتك';
 }
@@ -340,7 +352,7 @@ function validateDownPaymentRatio(downPayment, propertyValue) {
   if (ratio < MIN_DOWN_PAYMENT_RATIO) {
     return {
       valid: false,
-      message: `المقدم المطلوب يكون على الأقل 5% من سعر الوحدة.
+      message: `المقدم المطلوب يكون على الأقل 15% من سعر الوحدة.
       \nبما إن سعر الوحدة ${formatMoney(propertyValue)} جنيه، أقل مقدم مقبول هو ${formatMoney(minDP)} جنيه.
       \nاكتب المقدم تاني من ${formatMoney(minDP)} إلى ${formatMoney(maxDP)} جنيه 👇 
       \n   أو تختار وحدة بسعر أقل.`
@@ -393,18 +405,32 @@ function buildQuestionResponse(data = {}, capturedData = {}, stage = '') {
 
       \nهل لديك التزامات أو أقساط حالية؟`,
       'collect_obligations',
-      'اكتب قيمة الأقساط الحالية أو اكتب 0 لو مفيش 👇'
+      
     );
   }
 
   // ترتيب جديد: سعر الوحدة أولاً ثم المقدم
   if (nextStep === 'collect_property_price') {
-    const maxInstallment = Math.max(0, Math.round((data.income || 0) * MAX_INSTALLMENT_RATIO - (data.obligations || 0)));
-    return buildResponse(
-      `تمام.\nالحد الأقصى الآمن للقسط الجديد عندك تقريباً ${formatMoney(maxInstallment)} جنيه شهرياً.\nما سعر الوحدة السكنية المتوقع؟`,
-      'collect_property_price',
-      'اكتب سعر الوحدة المتوقع بالجنيه 👇'
-    );
+    const evaluation = pickBestEvaluation(data);
+    const maxAllowedByProgram = evaluation.program.maxPropertyValue;
+    const maxAffordable = evaluation.suitableUnitValue > 0 ? evaluation.suitableUnitValue : null;
+
+    const programLine = `- المبادرة الأنسب ليك: ${evaluation.program.label} .`;
+    const maxProgramLine = `- أعلى سعر وحدة في المبادرة دي: ${formatMoney(maxAllowedByProgram)} جنيه.`;
+    const affordableLine = maxAffordable
+      ? `- أعلى سعر وحدة مناسب ليك بناءً على دخلك والتزاماتك: ${formatMoney(maxAffordable)} جنيه تقريباً.`
+      : null;
+
+    const lines = [
+      `تمام يا ${firstName}.`,
+      `ما سعر الوحدة السكنية المتوقع؟`,
+      programLine,
+      maxProgramLine,
+      affordableLine,
+      `لو مش عارف السعر بالظبط، اكتب الميزانية اللي حاططها في بالك.`
+    ].filter(Boolean).join('\n');
+
+    return buildResponse(lines, 'collect_property_price', 'اكتب سعر الوحدة المتوقع بالجنيه 👇');
   }
 
   if (nextStep === 'collect_down_payment') {
@@ -442,9 +468,9 @@ function buildValidationResponse(stage, data = {}) {
   }
   if (stage === 'collect_obligations') {
     return buildResponse(
-      'هل لديك التزامات أو أقساط حالية؟ (اكتب الرقم أو 0 لو مفيش)',
+      'هل لديك التزامات أو أقساط حالية؟',
       'collect_obligations',
-      'اكتب رقم صحيح أكبر من أو يساوي صفر 👇'
+      'اختار نعم او لا 👇'
     );
   }
   if (stage === 'collect_property_price') {
@@ -458,12 +484,33 @@ function buildValidationResponse(stage, data = {}) {
     const minDP = Math.round((data.propertyValue || 0) * MIN_DOWN_PAYMENT_RATIO);
     const maxDP = Math.round((data.propertyValue || 0) * MAX_DOWN_PAYMENT_RATIO);
     return buildResponse(
-      `المقدم يجب أن يكون بين ${formatMoney(minDP)} و${formatMoney(maxDP)} جنيه\n(بين 5% و20% من سعر الوحدة)`,
+      `المقدم يجب أن يكون بين ${formatMoney(minDP)} و${formatMoney(maxDP)} جنيه\n(بين 15% و20% من سعر الوحدة)`,
       'collect_down_payment',
       `اكتب المقدم بين ${formatMoney(minDP)} و${formatMoney(maxDP)} جنيه 👇`
     );
   }
   return buildResponse('ما سعر الوحدة السكنية المتوقع؟', 'collect_property_price', 'اكتب سعر وحدة صحيح أكبر من صفر 👇');
+}
+
+// ─── التحقق من حد الدخل بناءً على الحالة الاجتماعية ──────────────────────────
+function validateIncomeCap(income, maritalStatus) {
+  if (!Number.isFinite(income) || !maritalStatus) return null;
+
+  if (maritalStatus === 'single' && income > MAX_INCOME_SINGLE) {
+    return {
+      valid: false,
+      message: `مرتبك (${formatMoney(income)} جنيه) أعلى من الحد المسموح بيه للتمويل العقاري للأعزب وهو ${formatMoney(MAX_INCOME_SINGLE)} جنيه.\nللأسف التمويل العقاري  مش متاح لحالتك دي. `
+    };
+  }
+
+  if (maritalStatus === 'married' && income > MAX_INCOME_MARRIED) {
+    return {
+      valid: false,
+      message: `مرتبك (${formatMoney(income)} جنيه) أعلى من الحد المسموح بيه للتمويل العقاري للمتزوج وهو ${formatMoney(MAX_INCOME_MARRIED)} جنيه.\nللأسف التمويل العقاري المدعوم مش متاح لحالتك دي.`
+    };
+  }
+
+  return { valid: true };
 }
 
 function validateStepInput(stage, userMessage, capturedData, mergedData) {
@@ -473,8 +520,28 @@ function validateStepInput(stage, userMessage, capturedData, mergedData) {
   if (stage === 'collect_name' && !capturedData.name && !mergedData.name) return buildValidationResponse(stage, mergedData);
   if (stage === 'collect_marital_status' && !capturedData.maritalStatus && !mergedData.maritalStatus) return buildValidationResponse(stage, mergedData);
   if (stage === 'collect_income' && (!Number.isFinite(capturedData.income) || capturedData.income <= 0)) return buildValidationResponse(stage, mergedData);
+  if (stage === 'collect_income' && Number.isFinite(capturedData.income) && capturedData.income > 0) {
+    const incomeCapCheck = validateIncomeCap(capturedData.income, mergedData.maritalStatus);
+    if (incomeCapCheck && !incomeCapCheck.valid) {
+      return buildResponse(incomeCapCheck.message, 'income_exceeded', '', 'mortgage_info');
+    }
+  }
   if (stage === 'collect_obligations' && !Number.isFinite(capturedData.obligations)) return buildValidationResponse(stage, mergedData);
   if (stage === 'collect_property_price' && (!Number.isFinite(capturedData.propertyValue) || capturedData.propertyValue <= 0)) return buildValidationResponse(stage, mergedData);
+  if (stage === 'collect_property_price' && Number.isFinite(capturedData.propertyValue) && capturedData.propertyValue > 0) {
+    // نحدد المبادرة الأنسب بناءً على الدخل فقط (بدون سعر الوحدة عشان منحيزش النتيجة)
+    const bestProgram = pickProgramByIncome(mergedData.income, mergedData.maritalStatus);
+    if (capturedData.propertyValue > bestProgram.maxPropertyValue) {
+      return buildResponse(
+        `سعر الوحدة اللي كتبته (${formatMoney(capturedData.propertyValue)} جنيه) أعلى من الحد المتاح ليك في ${bestProgram.label}.
+الحد الأقصى لسعر الوحدة في المبادرة دي هو ${formatMoney(bestProgram.maxPropertyValue)} جنيه.
+اكتب سعر وحدة في حدود ${formatMoney(bestProgram.maxPropertyValue)} جنيه أو أقل 👇`,
+        'collect_property_price',
+        `اكتب سعر وحدة بحد أقصى ${formatMoney(bestProgram.maxPropertyValue)} جنيه 👇`,
+        'mortgage_info'
+      );
+    }
+  }
   if (stage === 'collect_down_payment') {
     if (!Number.isFinite(capturedData.downPayment)) return buildValidationResponse(stage, mergedData);
     // التحقق من نسبة 5%-20%
@@ -510,25 +577,35 @@ function buildQualificationResponse(data = {}) {
     evaluation.requestedLoan, evaluation.program.annualRate, evaluation.program.maxYears
   );
 
-  return buildResponse(
+  // return buildResponse(
+  //   [
+  //     `بص يا ${getFirstName(data.name)} 👋 خليني ألخصهالك ببساطة:`,
+  //     statusLine,
+  //     affordabilityLine,
+  //     `- نوع المبادرة الأنسب ليك: ${evaluation.program.label}.`,
+  //     `- أقصى قسط مناسب ليك بعد خصم الالتزامات: ${formatMoney(evaluation.maxInstallment)} جنيه شهرياً تقريبا.`,
+  //     evaluation.availableFinance > 0
+  //       ? `- قيمة التمويل المتاحة تقريبياً: ${formatMoney(evaluation.availableFinance)} جنيه على مدة تصل إلى ${evaluation.program.maxYears} سنة.`
+  //       : '- لا يوجد تمويل متاح حاليًا على نفس الوحدة بالبيانات الحالية.',
+  //     `- المقدم المطلوب للوحدة المستهدفة: ${formatMoney(evaluation.requiredDownPayment)} جنيه تقريبا.`,
+  //     `- القسط المتوقع على وحدتك الحالية: ${formatMoney(requestedUnitInstallment)} جنيه شهرياً تقريبا.`,
+  //     evaluation.suitableUnitValue > 0
+  //       ? `- أقصى سعر وحدة مناسب ليك حالياً: حوالي ${formatMoney(evaluation.suitableUnitValue)} جنيه تقريبا.`
+  //       : '- تحتاج مقدم أعلى أو التزامات أقل قبل ما نحدد سعر وحدة مناسب بشكل منطقي.',
+  //     evaluation.adminFees > 0 ? `- المصروفات الإدارية التقريبية: ${formatMoney(evaluation.adminFees)} جنيه.` : null,
+  //     `- نصيحتي: ${buildAdvice(evaluation, data)}`,
+  //     '- رشحت لك شقتين مناسبين لمستواك المالي في البطاقات الظاهرة أسفل الرسالة.'
+  //   ].filter(Boolean).join('\n'),
+  //   'collect_phone',
+  //   'لو تحب نكمل الطلب ونرشح لك وحدات مناسبة، ابعت رقم موبايلك 👇',
+  //   'lead_capture'
+  // );
+
+return buildResponse(
     [
-      `بص يا ${getFirstName(data.name)} 👋 خليني ألخصهالك ببساطة:`,
-      statusLine,
-      affordabilityLine,
-      `- نوع المبادرة الأنسب ليك: ${evaluation.program.label}.`,
-      `- أقصى قسط مناسب ليك بعد خصم الالتزامات: ${formatMoney(evaluation.maxInstallment)} جنيه شهرياً تقريبا.`,
-      evaluation.availableFinance > 0
-        ? `- قيمة التمويل المتاحة تقريبياً: ${formatMoney(evaluation.availableFinance)} جنيه على مدة تصل إلى ${evaluation.program.maxYears} سنة.`
-        : '- لا يوجد تمويل متاح حاليًا على نفس الوحدة بالبيانات الحالية.',
-      `- المقدم المطلوب للوحدة المستهدفة: ${formatMoney(evaluation.requiredDownPayment)} جنيه تقريبا.`,
-      `- القسط المتوقع على وحدتك الحالية: ${formatMoney(requestedUnitInstallment)} جنيه شهرياً تقريبا.`,
-      evaluation.suitableUnitValue > 0
-        ? `- أقصى سعر وحدة مناسب ليك حالياً: حوالي ${formatMoney(evaluation.suitableUnitValue)} جنيه تقريبا.`
-        : '- تحتاج مقدم أعلى أو التزامات أقل قبل ما نحدد سعر وحدة مناسب بشكل منطقي.',
-      evaluation.adminFees > 0 ? `- المصروفات الإدارية التقريبية: ${formatMoney(evaluation.adminFees)} جنيه.` : null,
-      `- نصيحتي: ${buildAdvice(evaluation, data)}`,
-      '- رشحت لك شقتين مناسبين لمستواك المالي في البطاقات الظاهرة أسفل الرسالة.'
-    ].filter(Boolean).join('\n'),
+      `تمام يا ${getFirstName(data.name)}، ✅`,
+      `- المبادرة الأنسب ليك حاليًا: ${evaluation.program.label}.`,
+    ].join('\n'),
     'collect_phone',
     'لو تحب نكمل الطلب ونرشح لك وحدات مناسبة، ابعت رقم موبايلك 👇',
     'lead_capture'
@@ -540,9 +617,7 @@ function buildPhoneCapturedResponse(data = {}) {
   return buildResponse(
     [
       `تمام يا ${getFirstName(data.name)}، ✅`,
-      `- المبادرة الأنسب ليك حاليًا: ${evaluation.program.label}.`,
-      `- التمويل المتاح تقريبياً: ${formatMoney(evaluation.availableFinance)} جنيه.`,
-      `- القسط المتوقع على السيناريو الحالي: ${formatMoney(evaluation.expectedInstallment)} جنيه شهرياً.`,
+      `رشحتلك وحدتين ليك ممكن تبص عليهم`,
       `- فريقنا هيتواصل معاك ويكمل معاك الترشيحات والخطوات.`
     ].join('\n'),
     'lead_saved',

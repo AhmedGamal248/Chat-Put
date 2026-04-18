@@ -1,0 +1,227 @@
+<mxfile host="65bd71144e">
+    <diagram name="Page-1" id="j1HyRAcj3fDAtfOo06zZ">
+        <mxGraphModel dx="1113" dy="626" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" background="light-dark(#ffffff, #292929)" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="PEhOqx5yaOqQGdRM9ea0-25" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="PEhOqx5yaOqQGdRM9ea0-1" target="PEhOqx5yaOqQGdRM9ea0-2" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="PEhOqx5yaOqQGdRM9ea0-1" value="start" style="ellipse;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="410" y="30" width="65" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="PEhOqx5yaOqQGdRM9ea0-2" value="اهلا بيك في مستشارك العقاري&amp;nbsp;&lt;div&gt;ممكن اعرف اسم حضرتك ؟&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontSize=10;" parent="1" vertex="1">
+                    <mxGeometry x="382.5" y="100" width="120" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="PEhOqx5yaOqQGdRM9ea0-6" value="المستخدم : يكتب الاسم" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="550" y="170" width="120" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="PEhOqx5yaOqQGdRM9ea0-19" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="PEhOqx5yaOqQGdRM9ea0-8" target="PEhOqx5yaOqQGdRM9ea0-17" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="490" y="260"/>
+                            <mxPoint x="490" y="260"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="PEhOqx5yaOqQGdRM9ea0-20" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="PEhOqx5yaOqQGdRM9ea0-8" target="PEhOqx5yaOqQGdRM9ea0-12" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="490" y="290"/>
+                            <mxPoint x="490" y="390"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="PEhOqx5yaOqQGdRM9ea0-28" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="PEhOqx5yaOqQGdRM9ea0-8" target="PEhOqx5yaOqQGdRM9ea0-11" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="PEhOqx5yaOqQGdRM9ea0-8" value="&lt;br&gt;&lt;p style=&quot;box-sizing: border-box; margin: 0px; line-height: 1.8; font-family: &amp;quot;IBM Plex Sans Arabic&amp;quot;, &amp;quot;Segoe UI&amp;quot;, Tahoma, sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;&quot;&gt;أهلاً وسهلا يا (اسم المستخدم)👋 نورتنا!&lt;/p&gt;&lt;p style=&quot;box-sizing: border-box; margin: 8px 0px 0px; line-height: 1.8; font-family: &amp;quot;IBM Plex Sans Arabic&amp;quot;, &amp;quot;Segoe UI&amp;quot;, Tahoma, sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;&quot;&gt;تعالى نبدأ ونعرف إيه اللي ممكن أساعدك فيه بخصوص التمويل العقاري؟&lt;/p&gt;&lt;div&gt;&lt;br/&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontColor=default;labelBorderColor=light-dark(default, #573838);labelBackgroundColor=default;fontSize=9;" parent="1" vertex="1">
+                    <mxGeometry x="265" y="230" width="160" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="30" style="edgeStyle=none;html=1;" edge="1" parent="1" source="PEhOqx5yaOqQGdRM9ea0-10" target="29">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="PEhOqx5yaOqQGdRM9ea0-10" value="المستشار القانوني العقاري" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="130" y="360" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="18" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="PEhOqx5yaOqQGdRM9ea0-11" target="17">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="PEhOqx5yaOqQGdRM9ea0-11" value="الدليل التنظيمي للتمويل&amp;nbsp; العقاري وشروط البنك المركزي" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="310" y="360" width="130" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="PEhOqx5yaOqQGdRM9ea0-30" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="PEhOqx5yaOqQGdRM9ea0-12" target="PEhOqx5yaOqQGdRM9ea0-29" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="PEhOqx5yaOqQGdRM9ea0-12" value="مستشارك العقاري الذكي" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="520" y="360" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="PEhOqx5yaOqQGdRM9ea0-17" value="هنخفي ال text input" style="rhombus;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="520" y="220" width="80" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="PEhOqx5yaOqQGdRM9ea0-23" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.918;entryY=-0.025;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="PEhOqx5yaOqQGdRM9ea0-6" target="PEhOqx5yaOqQGdRM9ea0-8" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="PEhOqx5yaOqQGdRM9ea0-24" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.417;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="PEhOqx5yaOqQGdRM9ea0-2" target="PEhOqx5yaOqQGdRM9ea0-6" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="PEhOqx5yaOqQGdRM9ea0-27" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.431;entryY=-0.043;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="PEhOqx5yaOqQGdRM9ea0-8" target="PEhOqx5yaOqQGdRM9ea0-10" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="PEhOqx5yaOqQGdRM9ea0-43" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="PEhOqx5yaOqQGdRM9ea0-29" target="PEhOqx5yaOqQGdRM9ea0-38" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="PEhOqx5yaOqQGdRM9ea0-29" value="تمام يا (اسم المستخدم)&lt;div&gt;خليني اخد بياناتك عشان احسبلك افضل عرض&lt;/div&gt;&lt;div&gt;اول حاجة ايه حالتك الاجتماعية&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="510" y="480" width="140" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="PEhOqx5yaOqQGdRM9ea0-31" value="رسالة البوت" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" parent="1" vertex="1">
+                    <mxGeometry x="550" y="440" width="60" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="PEhOqx5yaOqQGdRM9ea0-46" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="PEhOqx5yaOqQGdRM9ea0-38" target="PEhOqx5yaOqQGdRM9ea0-45" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="PEhOqx5yaOqQGdRM9ea0-38" value="الحالة الاجتماعية" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="720" y="580" width="80" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="PEhOqx5yaOqQGdRM9ea0-44" value="المستخدم يختار بين 2 options&amp;nbsp;&lt;div&gt;اعزب او متزوج&lt;/div&gt;" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" parent="1" vertex="1">
+                    <mxGeometry x="660" y="535" width="100" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="PEhOqx5yaOqQGdRM9ea0-48" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="PEhOqx5yaOqQGdRM9ea0-45" target="PEhOqx5yaOqQGdRM9ea0-47" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="PEhOqx5yaOqQGdRM9ea0-56" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="PEhOqx5yaOqQGdRM9ea0-45" target="PEhOqx5yaOqQGdRM9ea0-49" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="580" y="720"/>
+                            <mxPoint x="735" y="720"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="PEhOqx5yaOqQGdRM9ea0-45" value="تمام يا احمد&lt;div&gt;ما هو صافي الدخل الشهري&lt;/div&gt;&lt;div&gt;اكتب صافي الدخل الشهري بالجنية&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="510" y="630" width="140" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="PEhOqx5yaOqQGdRM9ea0-47" value="هنظهر ال&amp;nbsp;&lt;div&gt;text input&amp;nbsp;&lt;/div&gt;" style="rhombus;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="730" y="650" width="80" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="PEhOqx5yaOqQGdRM9ea0-54" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="PEhOqx5yaOqQGdRM9ea0-49" target="PEhOqx5yaOqQGdRM9ea0-52" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="PEhOqx5yaOqQGdRM9ea0-49" value="المستخدم يكتب صافي الدخل" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="690" y="760" width="90" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="PEhOqx5yaOqQGdRM9ea0-59" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="PEhOqx5yaOqQGdRM9ea0-52" target="PEhOqx5yaOqQGdRM9ea0-58" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="PEhOqx5yaOqQGdRM9ea0-52" value="صافي دخلك المسجل (صافي الدخل)&lt;div&gt;نوع المبادرة الانسب ليك مبادرة (المبادرة الانسب ليه سواء 8% او 12%)&lt;/div&gt;&lt;div&gt;هل لديك التزامات او اقساط حالية؟&lt;/div&gt;&lt;div&gt;اكتب قيمة الاقساط الحالية او اكتب 0 لو مفيش&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="490" y="840" width="180" height="110" as="geometry"/>
+                </mxCell>
+                <mxCell id="PEhOqx5yaOqQGdRM9ea0-58" value="المستخدم يكتب الاقساط او الالتزامات" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="740" y="1000" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="PEhOqx5yaOqQGdRM9ea0-63" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="PEhOqx5yaOqQGdRM9ea0-60" target="PEhOqx5yaOqQGdRM9ea0-62" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="820" y="1140"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="PEhOqx5yaOqQGdRM9ea0-60" value="&#xa;&lt;span style=&quot;font-family: Helvetica; font-size: 12px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: center; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; float: none; display: inline !important;&quot;&gt;تمام&amp;nbsp;&lt;/span&gt;&lt;div style=&quot;forced-color-adjust: none; font-family: Helvetica; font-size: 12px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: center; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; box-shadow: none !important;&quot;&gt;الحد الاقصى الامن للقسط الجديد تقريبا (القسط) جنية شهريا&lt;/div&gt;&lt;div style=&quot;forced-color-adjust: none; font-family: Helvetica; font-size: 12px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: center; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; box-shadow: none !important;&quot;&gt;ما سعر الوحدة السكنية المتوقع&lt;/div&gt;&lt;div style=&quot;forced-color-adjust: none; font-family: Helvetica; font-size: 12px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: center; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; box-shadow: none !important;&quot;&gt;اكتب سعر الوحدة المتوقع بالجنية&lt;/div&gt;&#xa;&#xa;" style="rounded=0;whiteSpace=wrap;html=1;labelBackgroundColor=default;fontColor=light-dark(#000000,#FFFFFF);" parent="1" vertex="1">
+                    <mxGeometry x="502.5" y="1080" width="180" height="120" as="geometry"/>
+                </mxCell>
+                <mxCell id="PEhOqx5yaOqQGdRM9ea0-61" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.367;entryY=0.003;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="PEhOqx5yaOqQGdRM9ea0-58" target="PEhOqx5yaOqQGdRM9ea0-60" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="PEhOqx5yaOqQGdRM9ea0-65" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="PEhOqx5yaOqQGdRM9ea0-62" target="PEhOqx5yaOqQGdRM9ea0-64" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="PEhOqx5yaOqQGdRM9ea0-62" value="المستخدم يكتب سعر الوحدة" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="740" y="1190" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="4" style="edgeStyle=none;html=1;" edge="1" parent="1" source="PEhOqx5yaOqQGdRM9ea0-64" target="3">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="830" y="1350"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="PEhOqx5yaOqQGdRM9ea0-64" value="&#xa;&lt;p style=&quot;box-sizing: border-box; margin: 0px; line-height: 1.8; font-family: &amp;quot;IBM Plex Sans Arabic&amp;quot;, &amp;quot;Segoe UI&amp;quot;, Tahoma, sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;&quot;&gt;سعر الوحدة المسجل ٨٠٠٬٠٠٠ جنيه.&lt;/p&gt;&lt;p style=&quot;box-sizing: border-box; margin: 8px 0px 0px; line-height: 1.8; font-family: &amp;quot;IBM Plex Sans Arabic&amp;quot;, &amp;quot;Segoe UI&amp;quot;, Tahoma, sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;&quot;&gt;هل لديك مقدم؟ المقدم المطلوب يكون بين ١٢٠٬٠٠٠ و١٦٠٬٠٠٠ جنيه (15% إلى 20% من سعر الوحدة).&lt;/p&gt;&lt;p style=&quot;box-sizing: border-box; margin: 8px 0px 0px; line-height: 1.8; font-family: &amp;quot;IBM Plex Sans Arabic&amp;quot;, &amp;quot;Segoe UI&amp;quot;, Tahoma, sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;&quot;&gt;اكتب قيمة المقدم بين ١٢٠٬٠٠٠ و١٦٠٬٠٠٠ جنيه 👇&lt;/p&gt;&#xa;&#xa;" style="rounded=0;whiteSpace=wrap;html=1;fontSize=10;labelBackgroundColor=default;fontColor=light-dark(#000000,#FFFFFF);" parent="1" vertex="1">
+                    <mxGeometry x="460" y="1260" width="200" height="160" as="geometry"/>
+                </mxCell>
+                <mxCell id="7" style="edgeStyle=none;html=1;" edge="1" parent="1" source="3" target="6">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="3" value="المستخدم يكتب المقدم&amp;nbsp;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="770" y="1440" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="9" style="edgeStyle=none;html=1;" edge="1" parent="1" source="6" target="8">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="6" value="&lt;p style=&quot;box-sizing: border-box; margin: 0px; line-height: 1.8; color: rgb(237, 243, 255); font-family: &amp;quot;IBM Plex Sans Arabic&amp;quot;, &amp;quot;Segoe UI&amp;quot;, Tahoma, sans-serif; text-align: start;&quot;&gt;&lt;font style=&quot;font-size: 9px; background-color: light-dark(#ffffff, var(--ge-dark-color, #121212));&quot;&gt;بص يا (اسم المستخدم)👋 خليني ألخصهالك ببساطة:&lt;/font&gt;&lt;/p&gt;&lt;p style=&quot;box-sizing: border-box; margin: 8px 0px 0px; line-height: 1.8; color: rgb(237, 243, 255); font-family: &amp;quot;IBM Plex Sans Arabic&amp;quot;, &amp;quot;Segoe UI&amp;quot;, Tahoma, sans-serif; text-align: start;&quot;&gt;&lt;font style=&quot;font-size: 9px; background-color: light-dark(#ffffff, var(--ge-dark-color, #121212));&quot;&gt;- مؤهل مبدئيًا على مبادرة (المبادرة المناسبة) لمتوسطي الدخل.&lt;/font&gt;&lt;/p&gt;&lt;p style=&quot;box-sizing: border-box; margin: 8px 0px 0px; line-height: 1.8; color: rgb(237, 243, 255); font-family: &amp;quot;IBM Plex Sans Arabic&amp;quot;, &amp;quot;Segoe UI&amp;quot;, Tahoma, sans-serif; text-align: start;&quot;&gt;&lt;font style=&quot;font-size: 9px; background-color: light-dark(#ffffff, var(--ge-dark-color, #121212));&quot;&gt;- نوع المبادرة الأنسب ليك: مبادرة (المبادرة المناسبة) لمتوسطي الدخل.&lt;/font&gt;&lt;/p&gt;&lt;p style=&quot;box-sizing: border-box; margin: 8px 0px 0px; line-height: 1.8; color: rgb(237, 243, 255); font-family: &amp;quot;IBM Plex Sans Arabic&amp;quot;, &amp;quot;Segoe UI&amp;quot;, Tahoma, sans-serif; text-align: start;&quot;&gt;&lt;font style=&quot;font-size: 9px; background-color: light-dark(#ffffff, var(--ge-dark-color, #121212));&quot;&gt;- أقصى قسط مناسب ليك بعد خصم الالتزامات: (القسط)جنيه شهرياً تقريبا.&lt;/font&gt;&lt;/p&gt;&lt;p style=&quot;box-sizing: border-box; margin: 8px 0px 0px; line-height: 1.8; color: rgb(237, 243, 255); font-family: &amp;quot;IBM Plex Sans Arabic&amp;quot;, &amp;quot;Segoe UI&amp;quot;, Tahoma, sans-serif; text-align: start;&quot;&gt;&lt;font style=&quot;font-size: 9px; background-color: light-dark(#ffffff, var(--ge-dark-color, #121212));&quot;&gt;- قيمة التمويل المتاحة تقريبياً: (التمويل) جنيه على مدة تصل إلى (عدد السنين علة حسب انهي مبادرة) سنة.&lt;/font&gt;&lt;/p&gt;&lt;p style=&quot;box-sizing: border-box; margin: 8px 0px 0px; line-height: 1.8; color: rgb(237, 243, 255); font-family: &amp;quot;IBM Plex Sans Arabic&amp;quot;, &amp;quot;Segoe UI&amp;quot;, Tahoma, sans-serif; text-align: start;&quot;&gt;&lt;font style=&quot;font-size: 9px; background-color: light-dark(#ffffff, var(--ge-dark-color, #121212));&quot;&gt;- المقدم المطلوب للوحدة المستهدفة: (المقدم)جنيه تقريبا.&lt;/font&gt;&lt;/p&gt;&lt;p style=&quot;box-sizing: border-box; margin: 8px 0px 0px; line-height: 1.8; color: rgb(237, 243, 255); font-family: &amp;quot;IBM Plex Sans Arabic&amp;quot;, &amp;quot;Segoe UI&amp;quot;, Tahoma, sans-serif; text-align: start;&quot;&gt;&lt;font style=&quot;font-size: 9px; background-color: light-dark(#ffffff, var(--ge-dark-color, #121212));&quot;&gt;- القسط المتوقع على وحدتك الحالية: (القسط) جنيه شهرياً تقريبا.&lt;/font&gt;&lt;/p&gt;&lt;p style=&quot;box-sizing: border-box; margin: 8px 0px 0px; line-height: 1.8; color: rgb(237, 243, 255); font-family: &amp;quot;IBM Plex Sans Arabic&amp;quot;, &amp;quot;Segoe UI&amp;quot;, Tahoma, sans-serif; text-align: start;&quot;&gt;&lt;font style=&quot;font-size: 9px; background-color: light-dark(#ffffff, var(--ge-dark-color, #121212));&quot;&gt;- أقصى سعر وحدة مناسب ليك حالياً: حوالي (اقصى سعر وحدة مناسب ) جنيه تقريبا.&lt;/font&gt;&lt;/p&gt;&lt;p style=&quot;box-sizing: border-box; margin: 8px 0px 0px; line-height: 1.8; color: rgb(237, 243, 255); font-family: &amp;quot;IBM Plex Sans Arabic&amp;quot;, &amp;quot;Segoe UI&amp;quot;, Tahoma, sans-serif; text-align: start;&quot;&gt;&lt;font style=&quot;font-size: 9px; background-color: light-dark(#ffffff, var(--ge-dark-color, #121212));&quot;&gt;- المصروفات الإدارية التقريبية: (المصروفات الادارية) جنيه.&lt;/font&gt;&lt;/p&gt;&lt;p style=&quot;box-sizing: border-box; margin: 8px 0px 0px; line-height: 1.8; color: rgb(237, 243, 255); font-family: &amp;quot;IBM Plex Sans Arabic&amp;quot;, &amp;quot;Segoe UI&amp;quot;, Tahoma, sans-serif; text-align: start;&quot;&gt;&lt;font style=&quot;font-size: 9px; background-color: light-dark(#ffffff, var(--ge-dark-color, #121212));&quot;&gt;لو تحب نكمل الطلب ونرشح لك وحدات مناسبة، ابعت رقم موبايلك 👇&lt;/font&gt;&lt;/p&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="460" y="1520" width="230" height="500" as="geometry"/>
+                </mxCell>
+                <mxCell id="11" style="edgeStyle=none;html=1;" edge="1" parent="1" source="8" target="10">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="8" value="المستخدم يكتب رقم الموبايل" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="790" y="2050" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="13" style="edgeStyle=none;html=1;" edge="1" parent="1" source="10" target="12">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="10" value="تمام يا (اسم المستخدم)&lt;div&gt;المبادرة الانسب ليك حاليا مبادرة ال (المبادرة الانسب ليه)&lt;/div&gt;&lt;div&gt;التمويل المتاح تقريبا (التمويل المتاح ليه)&lt;/div&gt;&lt;div&gt;القسط المتوقع على السيناريو الحالي (القسط ) جنية شهريا&lt;/div&gt;&lt;div&gt;فريقنا هيتواصل معاك ويكمل معاك الترشيخات والخطوات&lt;/div&gt;&lt;div&gt;صورة شقة&lt;/div&gt;&lt;div&gt;شقة في القاهرة الجديدة&lt;/div&gt;&lt;div&gt;(سعر شقة مناسب ليه)&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;div style=&quot;color: rgb(63, 63, 63); scrollbar-color: rgb(226, 226, 226) rgb(251, 251, 251);&quot;&gt;صورة شقة&lt;/div&gt;&lt;div style=&quot;color: rgb(63, 63, 63); scrollbar-color: rgb(226, 226, 226) rgb(251, 251, 251);&quot;&gt;شقة في القاهرة الجديدة&lt;/div&gt;&lt;div style=&quot;color: rgb(63, 63, 63); scrollbar-color: rgb(226, 226, 226) rgb(251, 251, 251);&quot;&gt;(سعر شقة مناسب ليه)&lt;/div&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="460" y="2130" width="230" height="260" as="geometry"/>
+                </mxCell>
+                <mxCell id="12" value="هنشيل ال text input" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="820" y="2240" width="80" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="16" value="" style="curved=1;endArrow=classic;html=1;exitX=0.007;exitY=0.435;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="10" target="PEhOqx5yaOqQGdRM9ea0-11">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="340" y="880" as="sourcePoint"/>
+                        <mxPoint x="400" y="590" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="380" y="1480"/>
+                            <mxPoint x="420" y="640"/>
+                            <mxPoint x="450" y="520"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="21" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="17" target="20">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="17" value="&lt;div&gt;&lt;span style=&quot;background-color: transparent;&quot;&gt;تمام يا (اسم المستخدم )&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: transparent;&quot;&gt;تحب تعرف شروط ايه ؟&lt;/span&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="265" y="490" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="26" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="19" target="24">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="19" value="شروط الشخص نفسه" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="60" y="640" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="25" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="20" target="23">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="20" value="شروط الوحدة السكنية" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="270" y="640" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="22" style="edgeStyle=none;html=1;entryX=0.834;entryY=0.014;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="17" target="19">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="28" style="edgeStyle=none;html=1;" edge="1" parent="1" source="23" target="19">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="23" value="شروط الوحدة السكنية للحصول على التمويل العقاري&lt;div&gt;1- الوحدة مسجلة رسميا او قابلة للتسجيل في الشهر العقاري&lt;/div&gt;&lt;div&gt;2-الوحدة&amp;nbsp; مكتملة البناء او في مرحله متقدمة من التشطيب&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="220" y="760" width="170" height="130" as="geometry"/>
+                </mxCell>
+                <mxCell id="24" value="شروط الشخص نفسه للحصول على التمويل العقاري" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="40" y="760" width="140" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="27" style="edgeStyle=none;html=1;entryX=0.083;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="24" target="20">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="29" value="تمام يا (اسم المستخدم)&lt;div&gt;للاطلاع على المخالفات سيتم توجيهك للصفحة الرئيسية الان&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="30" y="470" width="120" height="60" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

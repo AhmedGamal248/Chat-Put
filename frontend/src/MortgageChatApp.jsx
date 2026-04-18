@@ -25,16 +25,33 @@ const QUICK_ACTIONS = {
     'شروط الوحدة السكنية',
     'شروط الشخص نفسه'
   ],
-  collect_marital_status: [],
+  // input hidden في هذه الخطوة، لذا لازم يكون فيه أزرار بديلة
+  collect_marital_status: [
+    'اعزب',
+    'متزوج'
+  ],
   collect_income: [],
-  collect_obligations: [],
+  collect_obligations: ['نعم', 'لا'],
   collect_down_payment: [],
   collect_property_price: [],
   collect_phone: [],
-  lead_saved: [],
+  // بعد إدخال رقم الموبايل بنخفي input ونظهر خيارين فقط
+  lead_saved: [
+    'الدليل التنظيمي للتمويل العقاري وشروط البنك المركزي',
+    'المستشار القانوني العقاري'
+  ],
   violations_redirect: [],
-  show_unit_conditions: [],
-  show_person_conditions: [],
+  // الدخل أعلى من الحد المسموح → نهاية المحادثة بدون أزرار
+  income_exceeded: [],
+  // بعد عرض شروط الوحدة/الشخص بنظهر خيارين مع إخفاء input
+  show_unit_conditions: [
+    'شروط الشخص نفسه',
+    'المستشار القانوني العقاري'
+  ],
+  show_person_conditions: [
+    'شروط الوحدة السكنية',
+    'المستشار القانوني العقاري'
+  ],
   default: []
 };
 
@@ -44,9 +61,9 @@ const PLACEHOLDERS = {
   select_conditions_type: 'اختر من الأزرار فوق',
   collect_marital_status: 'اكتب: أعزب أو متزوج',
   collect_income: 'مثال: 15,000',
-  collect_obligations: 'مثال: 0 أو 2500',
+  collect_obligations: "",
   collect_property_price: 'مثال: 1,000,000',
-  collect_down_payment: 'مثال: 120,000',
+  collect_down_payment: '',
   collect_phone: 'مثال: 011 *******',
   lead_saved: '',
   violations_redirect: '',
@@ -169,6 +186,29 @@ function MortgageChatApp() {
   const inputMode = currentStep === 'collect_phone' ? 'tel'
     : NUMERIC_STEPS.has(currentStep) ? 'numeric' : 'text';
 
+  // ─── التحكم في ظهور/اختفاء text input ─────────────────────────────────────
+  // المطلوب من الدياجرام: في خطوات اختيار معينة تكون الكتابة مختفية والانتقال يكون بالضغط على الأزرار.
+  const hideTextInputSteps = new Set([
+    // بعد الاسم: 3 اختيارات
+    'select_intent',
+    // الحالة الاجتماعية: اعزب/متزوج
+    'collect_marital_status',
+    // معرفة لو عليه التزامات او لا
+    'collect_obligations',
+    // تحب تعرف شروط إيه بالظبط؟ (اختيار بالزرار)
+    'select_conditions_type',
+    // عرض شروط الوحدة/الشخص (اختيار بالزرار)
+    'show_unit_conditions',
+    'show_person_conditions',
+    // بعد إدخال الموبايل: خيارين فقط
+    'lead_saved',
+    // زيارتنا لصفحة المخالفات: input غير مطلوب
+    'violations_redirect',
+    // الدخل أعلى من الحد المسموح → نهاية المحادثة
+    'income_exceeded'
+  ]);
+  const isTextInputHidden = hideTextInputSteps.has(currentStep);
+
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' });
   }, [messages, loading]);
@@ -245,6 +285,109 @@ function MortgageChatApp() {
       }
     }
 
+    // ── بعد تسجيل الموبايل: خيارين (دليل/قانوني) ──
+    if (currentStep === 'lead_saved') {
+      const firstName = getFirstName(localSession.name);
+
+      if (lower.includes('القانوني')) {
+        setLocalSession(s => ({ ...s, stage: 'violations_redirect' }));
+        appendUserMsg(text);
+        const homePageUrl = getHomePageUrl();
+        appendBotMsg({
+          text: `تمام يا ${firstName}! 🏛️\nللاطلاع على المخالفات سيتم توجيهك للصفحة الرئيسية للموقع:\n\n🔗 ${homePageUrl}`,
+          cta: '',
+          nextStep: 'violations_redirect',
+          intent: 'violations'
+        });
+        setTimeout(() => {
+          window.location.href = homePageUrl;
+        }, 5000);
+        return true;
+      }
+
+      if (lower.includes('شروط') || lower.includes('الدليل') || lower.includes('تنظيمي')) {
+        setLocalSession(s => ({ ...s, intent: 'conditions', stage: 'select_conditions_type' }));
+        appendUserMsg(text);
+        appendBotMsg({
+          text: `تمام يا ${firstName}! 📋\nتحب تعرف شروط إيه بالظبط؟`,
+          cta: 'اختار من الأزرار 👇',
+          nextStep: 'select_conditions_type',
+          intent: 'conditions'
+        });
+        return true;
+      }
+
+      return false;
+    }
+
+    // ── بعد عرض شروط الوحدة: خيارين (شخص/قانوني) ──
+    if (currentStep === 'show_unit_conditions') {
+      const firstName = getFirstName(localSession.name);
+
+      if (lower.includes('القانوني')) {
+        setLocalSession(s => ({ ...s, stage: 'violations_redirect' }));
+        appendUserMsg(text);
+        const homePageUrl = getHomePageUrl();
+        appendBotMsg({
+          text: `تمام يا ${firstName}! 🏛️\nللاطلاع على المخالفات سيتم توجيهك للصفحة الرئيسية للموقع:\n\n🔗 ${homePageUrl}`,
+          cta: '',
+          nextStep: 'violations_redirect',
+          intent: 'violations'
+        });
+        setTimeout(() => {
+          window.location.href = homePageUrl;
+        }, 5000);
+        return true;
+      }
+
+      if (lower.includes('شخص')) {
+        appendUserMsg(text);
+        appendBotMsg({
+          text: PERSON_CONDITIONS_TEXT,
+          cta: 'هل تحتاج مساعدة في حاجة تانية؟',
+          nextStep: 'show_person_conditions',
+          intent: 'conditions'
+        });
+        return true;
+      }
+
+      return false;
+    }
+
+    // ── بعد عرض شروط الشخص: خيارين (وحدة/قانوني) ──
+    if (currentStep === 'show_person_conditions') {
+      const firstName = getFirstName(localSession.name);
+
+      if (lower.includes('القانوني')) {
+        setLocalSession(s => ({ ...s, stage: 'violations_redirect' }));
+        appendUserMsg(text);
+        const homePageUrl = getHomePageUrl();
+        appendBotMsg({
+          text: `تمام يا ${firstName}! 🏛️\nللاطلاع على المخالفات سيتم توجيهك للصفحة الرئيسية للموقع:\n\n🔗 ${homePageUrl}`,
+          cta: '',
+          nextStep: 'violations_redirect',
+          intent: 'violations'
+        });
+        setTimeout(() => {
+          window.location.href = homePageUrl;
+        }, 5000);
+        return true;
+      }
+
+      if (lower.includes('وحدة') || lower.includes('سكنية')) {
+        appendUserMsg(text);
+        appendBotMsg({
+          text: UNIT_CONDITIONS_TEXT,
+          cta: 'هل تحتاج مساعدة في حاجة تانية؟',
+          nextStep: 'show_unit_conditions',
+          intent: 'conditions'
+        });
+        return true;
+      }
+
+      return false;
+    }
+
     return false; // مش flow محلي → روح للـ API
   }
 
@@ -303,8 +446,8 @@ function MortgageChatApp() {
     // flow محلي (اختيار النية أو الشروط)
     if (handleLocalFlow(text)) return;
 
-    // مسار الأسعار → API
-    if (localSession.intent === 'prices' || currentStep === 'collect_phone' || NUMERIC_STEPS.has(currentStep) || currentStep === 'collect_marital_status') {
+    // مسار الأسعار → API (خطوات الإدخال الرقمية/الحالة الاجتماعية/التواصل فقط)
+    if (currentStep === 'collect_phone' || NUMERIC_STEPS.has(currentStep) || currentStep === 'collect_marital_status') {
       appendUserMsg(text);
       setLoading(true);
 
@@ -375,6 +518,9 @@ function MortgageChatApp() {
 
         {/* نافذة الرسائل */}
         <div className="messages-window">
+          <div className="chat-header">
+            <h2 className="chat-title">المساعد الذكي 🤖</h2>
+          </div>
           {messages.map(message => {
             const propertyCards = normalizePropertyCards(message.images);
             return (
@@ -438,25 +584,39 @@ function MortgageChatApp() {
         )}
 
         {/* محرر الرسالة */}
-        <form className="composer" onSubmit={handleSubmit}>
-         
+        {!isTextInputHidden && (
+          <form className="composer" onSubmit={handleSubmit}>
+              <div className="composer-row ">
+                {!isTextInputHidden && (
+                  <>
+                    <input
+                      autoFocus
+                         inputMode={inputMode}
+                         enterKeyHint="send"
+                         dir="auto"
+                         type="text"
+                         value={input}
+                         onChange={e => {
+                         const value = e.target.value;
+                         const raw = value.replace(/,/g, "");
 
-          <div className="composer-row ">
-            <input
-              inputMode={inputMode}
-              enterKeyHint="send"
-              dir="auto"
-              type="text"
-              value={input}
-              onChange={e => setInput(e.target.value)}
-              placeholder={placeholder}
-              disabled={loading || currentStep === 'violations_redirect'}
-            />
-            <button type="submit" disabled={loading || !input.trim() || currentStep === 'violations_redirect'}>
-              {loading ? 'جار الإرسال...' : 'ارسل'}
-            </button>
-          </div>
-        </form>
+                          if (/^\d*$/.test(raw) && !raw.startsWith("0")) {
+                              setInput(raw ? Number(raw).toLocaleString("en-US") : "");
+                          } else {
+                            setInput(value);
+                              }
+                            }}
+                            placeholder={placeholder}
+                      disabled={loading || currentStep === 'violations_redirect'}
+                    />
+                    <button type="submit" disabled={loading || !input.trim() || currentStep === 'violations_redirect'}>
+                      {loading ? 'جار الإرسال...' : 'ارسل'}
+                    </button>
+                  </>
+                )}
+              </div>
+          </form>
+        )}
 
         {/* شريط الأدوات */}
         <div className="chat-toolbar">
