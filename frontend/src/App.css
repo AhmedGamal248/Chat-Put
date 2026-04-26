@@ -53,23 +53,33 @@
   position: relative;
 }
 
-/* subtle top accent line */
-.chat-panel::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, var(--brand), var(--brand-mid), var(--accent));
-  z-index: 10;
-}
+
+
+
 
 /* ────────────── HEADER ────────────── */
 .chat-header {
-  text-align: center;
-  padding: 18px 24px 14px;
-  border-bottom: 1px solid var(--line);
-  background: linear-gradient(135deg, #fdfeff 0%, #f4f9ff 100%);
   position: relative;
+  padding: 18px 24px 14px;
+  border-radius: 15px;
+  background: linear-gradient(135deg, #fdfeff 0%, #f4f9ff 100%);
+  text-align: center;
+}
+
+.chat-header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 2px; /* سمك البوردر */
+
+  border-radius: 15px;
+  background: linear-gradient(90deg, var(--brand), var(--brand-mid), var(--accent));
+
+  -webkit-mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
 }
 
 .chat-header h2,
