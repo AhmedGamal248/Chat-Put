@@ -1,6 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap');
+
 :root {
-  color: #edf3ff;
-  background: #090d18;
+  color: #0f172a;
+  background: #eef4fb;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -22,7 +24,7 @@ body,
 
 body {
   margin: 0;
-  background: #090d18;
+  background: #eef4fb;
 }
 
 button,
