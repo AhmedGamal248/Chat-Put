@@ -1,0 +1,2 @@
+Server running on port \\.\pipe\d6db3494-cb4a-485f-9bf0-b000ca8b1838
+Connected to MongoDB
